@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,243 +19,314 @@
       --danger: #ff6b8b;
       --shadow: 0 20px 60px rgba(0,0,0,0.35);
       --radius: 24px;
-    }* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top, rgba(140,125,255,0.28), transparent 34%),
-    radial-gradient(circle at right, rgba(88,214,199,0.15), transparent 28%),
-    linear-gradient(180deg, var(--bg1), var(--bg2));
-  overflow-x: hidden;
-}
+    }
 
-.wrap {
-  min-height: 100%;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(140,125,255,0.28), transparent 34%),
+        radial-gradient(circle at right, rgba(88,214,199,0.15), transparent 28%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+    }
 
-.shell {
-  width: min(920px, 100%);
-  display: grid;
-  gap: 18px;
-}
+    .wrap {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
 
-.hero, .panel {
-  background: var(--card);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
+    .shell {
+      width: min(920px, 100%);
+      display: grid;
+      gap: 18px;
+    }
 
-.hero {
-  padding: 28px;
-  position: relative;
-  overflow: hidden;
-}
+    .hero, .panel {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
 
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: auto;
-  border-radius: 999px;
-  filter: blur(22px);
-  opacity: .6;
-  pointer-events: none;
-}
+    .hero {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.hero::before {
-  width: 180px; height: 180px;
-  background: rgba(140,125,255,0.35);
-  top: -40px; right: -20px;
-}
-.hero::after {
-  width: 140px; height: 140px;
-  background: rgba(88,214,199,0.22);
-  bottom: -30px; left: -20px;
-}
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 999px;
+      filter: blur(22px);
+      opacity: .6;
+      pointer-events: none;
+    }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  color: var(--muted);
-  font-size: 13px;
-  letter-spacing: .2px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
+    .hero::before {
+      width: 180px; height: 180px;
+      background: rgba(140,125,255,0.35);
+      top: -40px; right: -20px;
+    }
 
-h1 {
-  margin: 16px 0 10px;
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-}
+    .hero::after {
+      width: 140px; height: 140px;
+      background: rgba(88,214,199,0.22);
+      bottom: -30px; left: -20px;
+    }
 
-.sub {
-  margin: 0;
-  max-width: 62ch;
-  color: var(--muted);
-  line-height: 1.75;
-  font-size: 1rem;
-}
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .2px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 18px;
-}
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
 
-.panel {
-  padding: 22px;
-}
+    .sub {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
 
-.title {
-  font-size: 1.05rem;
-  margin: 0 0 8px;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+    }
 
-.text {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
-}
+    .panel {
+      padding: 22px;
+    }
 
-.timer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 18px;
-}
+    .title {
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+    }
 
-.box {
-  padding: 14px 10px;
-  border-radius: 18px;
-  text-align: center;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.08);
-}
+    .text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
 
-.num {
-  font-size: 1.5rem;
-  font-weight: 800;
-  line-height: 1;
-}
+    .timer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
 
-.lab {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--muted);
-}
+    .box {
+      padding: 14px 10px;
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.09);
-  background: rgba(255,255,255,0.06);
-  color: var(--muted);
-  font-size: 14px;
-}
+    .num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1;
+    }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent2);
-  box-shadow: 0 0 0 8px rgba(88,214,199,0.12);
-}
+    .lab {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 18px;
-}
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-button, a.btn {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  padding: 14px 18px;
-  border-radius: 16px;
-  font: inherit;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 8px rgba(88,214,199,0.12);
+    }
 
-button:hover, a.btn:hover { transform: translateY(-1px); }
-button:active, a.btn:active { transform: translateY(0); }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
 
-.primary {
-  background: linear-gradient(135deg, var(--accent), #6cb1ff);
-  color: white;
-  box-shadow: 0 12px 30px rgba(108,177,255,0.28);
-}
+    button, a.btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
 
-.ghost {
-  background: rgba(255,255,255,0.08);
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,0.09);
-}
+    button:hover, a.btn:hover { transform: translateY(-1px); }
+    button:active, a.btn:active { transform: translateY(0); }
 
-.disabled {
-  opacity: .45;
-  cursor: not-allowed;
-  pointer-events: none;
-}
+    .primary {
+      background: linear-gradient(135deg, var(--accent), #6cb1ff);
+      color: white;
+      box-shadow: 0 12px 30px rgba(108,177,255,0.28);
+    }
 
-.question {
-  display: none;
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(140,125,255,0.16), rgba(255,255,255,0.07));
-  border: 1px solid rgba(255,255,255,0.09);
-}
+    .ghost {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
 
-.question h2 {
-  margin: 0 0 8px;
-  font-size: 1.35rem;
-}
+    .disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
-.question p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.75;
-}
+    .question {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(140,125,255,0.16), rgba(255,255,255,0.07));
+      border: 1px solid rgba(255,255,255,0.09);
+    }
 
-.footer {
-  text-align: center;
-  color: rgba(245,247,255,0.65);
-  font-size: 13px;
-  padding: 2px 10px 0;
-}
+    .question h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
 
-@media (max-width: 760px) {
-  .hero, .panel { padding: 18px; }
-  .grid { grid-template-columns: 1fr; }
-  .timer { grid-template-columns: repeat(2, 1fr); }
-}
+    .question p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
 
+    .reveal {
+      display: none;
+      overflow: hidden;
+    }
+
+    .reveal-inner {
+      display: grid;
+      gap: 18px;
+    }
+
+    .story-head {
+      display: grid;
+      gap: 10px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius);
+    }
+
+    .story-head h2 {
+      margin: 0;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+
+    .story-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .card-story {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 18px;
+    }
+
+    .photo-card, .note-card {
+      padding: 18px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .photo-card img {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .story {
+      white-space: pre-line;
+      color: var(--muted);
+      line-height: 1.9;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: rgba(245,247,255,0.65);
+      font-size: 13px;
+      padding: 2px 10px 0;
+    }
+
+    @media (max-width: 760px) {
+      .hero, .panel { padding: 18px; }
+      .grid { grid-template-columns: 1fr; }
+      .timer { grid-template-columns: repeat(2, 1fr); }
+      .card-story { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -268,59 +340,130 @@ button:active, a.btn:active { transform: translateY(0); }
           jadi hanya bisa dibuka tepat pukul 22:30 dan akan tertutup lagi 24 jam setelahnya.
           Tantangan ini juga dibatasi untuk bulan dan tahun berjalan saja.
         </p>
-        <div class="status" id="statusBar"><span class="dot" id="statusDot"></span><span id="statusText">Memeriksa waktu...</span></div>
-      </section><section class="grid">
-    <article class="panel">
-      <h3 class="title">Waktu pembukaan</h3>
-      <p class="text">
-        Tombol akan aktif saat jam menunjukkan <strong>22:30</strong>. Jika sudah terbuka,
-        akses hanya berlaku selama 24 jam sampai <strong>22:30 keesokan harinya</strong>.
-        Di luar bulan atau tahun ini, halaman akan tetap terkunci.
-      </p>
+        <div class="status" id="statusBar">
+          <span class="dot" id="statusDot"></span>
+          <span id="statusText">Memeriksa waktu...</span>
+        </div>
+      </section>
 
-      <div class="timer" aria-label="Hitungan mundur">
-        <div class="box"><div class="num" id="days">00</div><span class="lab">Hari</span></div>
-        <div class="box"><div class="num" id="hours">00</div><span class="lab">Jam</span></div>
-        <div class="box"><div class="num" id="minutes">00</div><span class="lab">Menit</span></div>
-        <div class="box"><div class="num" id="seconds">00</div><span class="lab">Detik</span></div>
-      </div>
+      <section class="grid">
+        <article class="panel" id="lockPanel">
+          <h3 class="title">Waktu pembukaan</h3>
+          <p class="text">
+            Tombol akan aktif saat jam menunjukkan <strong>22:30</strong>. Jika sudah terbuka,
+            akses hanya berlaku selama 24 jam sampai <strong>22:30 keesokan harinya</strong>.
+            Di luar bulan atau tahun ini, halaman akan tetap terkunci.
+          </p>
 
-      <div class="actions">
-        <button class="primary disabled" id="startBtn">Masuk ke pertanyaan</button>
-        <a class="btn ghost" href="#info">Baca info</a>
-      </div>
+          <div class="timer" aria-label="Hitungan mundur">
+            <div class="box"><div class="num" id="days">00</div><span class="lab">Hari</span></div>
+            <div class="box"><div class="num" id="hours">00</div><span class="lab">Jam</span></div>
+            <div class="box"><div class="num" id="minutes">00</div><span class="lab">Menit</span></div>
+            <div class="box"><div class="num" id="seconds">00</div><span class="lab">Detik</span></div>
+          </div>
 
-      <div class="question" id="questionBox">
-        <h2>Apakah kamu siap.....</h2>
-        <p>
-          Perjalanan berikutnya bukan sekadar klik tombol. Kamu akan masuk ke rangkaian
-          petunjuk, gambar, dan jawaban yang harus dicari satu per satu. Hati-hati,
-          karena setiap langkah bisa jadi penting.
-        </p>
-      </div>
-    </article>
+          <div class="actions">
+            <button class="primary disabled" id="startBtn" disabled>Masuk ke pertanyaan</button>
+            <a class="btn ghost" href="#info">Baca info</a>
+          </div>
 
-    <aside class="panel" id="info">
-      <h3 class="title">Tentang teka-teki ini</h3>
-      <p class="text">
-        Teka-teki digital ini dibuat sebagai tantangan singkat yang terlihat sederhana,
-        tetapi punya aturan waktu yang ketat. Tujuannya bukan cuma menjawab pertanyaan,
-        tetapi juga memperhatikan momen yang tepat untuk memulai.
-      </p>
-      <p class="text" style="margin-top:12px;">
-        Domain: <strong>raka579</strong><br />
-        ©2026 raka579 • All Rights Reserved.
-      </p>
-      <p class="text" style="margin-top:12px;">
-        Catatan: status buka/tutup mengikuti waktu perangkat yang membuka halaman ini.
-      </p>
-    </aside>
-  </section>
+          <div class="question" id="questionBox">
+            <h2>Apakah kamu siap.....</h2>
+            <p>
+              Perjalanan berikutnya bukan sekadar klik tombol. Kamu akan masuk ke rangkaian
+              petunjuk, gambar, dan jawaban yang harus dicari satu per satu. Hati-hati,
+              karena setiap langkah bisa jadi penting.
+            </p>
+          </div>
+        </article>
 
-  <div class="footer">©2026 raka579 • All Rights Reserved.</div>
-</main>
+        <aside class="panel" id="info">
+          <h3 class="title">Tentang teka-teki ini</h3>
+          <p class="text">
+            Teka-teki digital ini dibuat sebagai tantangan singkat yang terlihat sederhana,
+            tetapi punya aturan waktu yang ketat. Tujuannya bukan cuma menjawab pertanyaan,
+            tetapi juga memperhatikan momen yang tepat untuk memulai.
+          </p>
+          <p class="text" style="margin-top:12px;">
+            Domain: <strong>raka579</strong><br />
+            ©2026 raka579 • All Rights Reserved.
+          </p>
+          <p class="text" style="margin-top:12px;">
+            Catatan: status buka/tutup mengikuti waktu perangkat yang membuka halaman ini.
+          </p>
+        </aside>
+      </section>
 
-  </div>  <script>
+      <section class="reveal panel" id="revealSection">
+        <div class="reveal-inner">
+          <div class="story-head">
+            <h2>━━━━━━━━━━━━━━━━━━<br>🧩 EDO - SEORANG SISWA PROGRAMER<br>━━━━━━━━━━━━━━━━━━</h2>
+            <p>"Setiap programmer meninggalkan jejak. Sebagian meninggalkannya di internet."</p>
+          </div>
+
+          <div class="card-story">
+            <div class="photo-card">
+              <img src="foto.jpg" alt="Foto kamar Edo" />
+              <div class="caption">
+                Foto kamar Edo. Di sinilah petunjuk pertama tersembunyi.
+              </div>
+            </div>
+
+            <div class="note-card">
+              <p class="story">
+Selamat datang di tantangan pertama.
+
+Di hadapanmu adalah kamar milik seseorang bernama Edo.
+
+Ia masih muda, gemar bermain sepak bola, dan sedang belajar membuat website.
+
+Suatu hari, Edo berhasil menerbitkan website pertamanya.
+
+Namun...
+
+Ia tidak pernah membagikan alamat website tersebut kepada siapa pun.
+
+Yang tersisa hanyalah foto kamarnya dan beberapa catatan.
+
+━━━━━━━━━━━━━━━━━━
+📄 CATATAN EDO
+━━━━━━━━━━━━━━━━━━
+
+• Namaku hanya terdiri dari tiga huruf.
+
+• Aku lahir pada tahun 2006.
+
+• Saat catatan ini dibuat, usiaku masih 15 tahun.
+
+• Website pertamaku dibuat menggunakan GitHub Pages.
+
+━━━━━━━━━━━━━━━━━━
+
+🎯 Misi:
+
+Temukan alamat website pertama milik Edo.
+
+Aku tidak akan memberitahumu bagaimana bentuk alamatnya.
+
+Kalau kamu cukup teliti, semua petunjuk sudah tersedia.
+
+Kadang jawaban bukan tersembunyi...
+melainkan memang tidak pernah diperhatikan.
+
+Selamat berburu.
+
+@Thinking
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">©2026 raka579 • All Rights Reserved.</div>
+    </main>
+  </div>
+
+  <script>
     const startBtn = document.getElementById('startBtn');
     const questionBox = document.getElementById('questionBox');
     const statusText = document.getElementById('statusText');
@@ -329,6 +472,8 @@ button:active, a.btn:active { transform: translateY(0); }
     const hoursEl = document.getElementById('hours');
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
+    const revealSection = document.getElementById('revealSection');
+    const lockPanel = document.getElementById('lockPanel');
 
     function pad(n) {
       return String(n).padStart(2, '0');
@@ -358,6 +503,15 @@ button:active, a.btn:active { transform: translateY(0); }
       return { openAt, closeAt };
     }
 
+    function showReveal() {
+      revealSection.style.display = 'block';
+      revealSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function hideReveal() {
+      revealSection.style.display = 'none';
+    }
+
     function update() {
       const now = new Date();
       const { openAt, closeAt } = getNextWindow(now);
@@ -367,13 +521,12 @@ button:active, a.btn:active { transform: translateY(0); }
       const duringWindow = now >= openAt && now < closeAt;
       const afterClose = now >= closeAt;
 
-      let target;
+      let target = null;
       let label = '';
       let enabled = false;
 
       if (!currentMonthYearValid) {
         label = 'Akses terkunci untuk bulan/tahun ini.';
-        target = null;
       } else if (beforeOpen) {
         label = 'Menuju pembukaan pukul 22:30.';
         target = openAt;
@@ -383,13 +536,13 @@ button:active, a.btn:active { transform: translateY(0); }
         enabled = true;
       } else if (afterClose) {
         label = 'Waktu habis.';
-        target = null;
       }
 
       if (!currentMonthYearValid) {
         startBtn.classList.add('disabled');
         startBtn.setAttribute('disabled', 'disabled');
         questionBox.style.display = 'none';
+        hideReveal();
         statusDot.style.background = 'var(--danger)';
         statusText.textContent = label;
         daysEl.textContent = '00';
@@ -402,13 +555,15 @@ button:active, a.btn:active { transform: translateY(0); }
       if (enabled) {
         startBtn.classList.remove('disabled');
         startBtn.removeAttribute('disabled');
+        questionBox.style.display = 'block';
         statusDot.style.background = 'var(--accent2)';
         statusText.textContent = label;
-        questionBox.style.display = 'block';
+        showReveal();
       } else {
         startBtn.classList.add('disabled');
         startBtn.setAttribute('disabled', 'disabled');
         questionBox.style.display = 'none';
+        hideReveal();
         statusDot.style.background = beforeOpen ? 'var(--accent)' : 'var(--danger)';
         statusText.textContent = label;
       }
@@ -429,10 +584,11 @@ button:active, a.btn:active { transform: translateY(0); }
 
     startBtn.addEventListener('click', () => {
       if (startBtn.disabled) return;
-      questionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showReveal();
     });
 
     update();
     setInterval(update, 1000);
-  </script></body>
+  </script>
+</body>
 </html>
