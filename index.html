@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1020" />
+  <title>Teka-Teki Digital • Raka579</title>
+  <style>
+    :root {
+      --bg1: #0b1020;
+      --bg2: #131a33;
+      --card: rgba(255,255,255,0.08);
+      --card-strong: rgba(255,255,255,0.13);
+      --text: #f5f7ff;
+      --muted: rgba(245,247,255,0.72);
+      --line: rgba(255,255,255,0.12);
+      --accent: #8c7dff;
+      --accent2: #58d6c7;
+      --danger: #ff6b8b;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 24px;
+    }* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(140,125,255,0.28), transparent 34%),
+    radial-gradient(circle at right, rgba(88,214,199,0.15), transparent 28%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  overflow-x: hidden;
+}
+
+.wrap {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.shell {
+  width: min(920px, 100%);
+  display: grid;
+  gap: 18px;
+}
+
+.hero, .panel {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  border-radius: 999px;
+  filter: blur(22px);
+  opacity: .6;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 180px; height: 180px;
+  background: rgba(140,125,255,0.35);
+  top: -40px; right: -20px;
+}
+.hero::after {
+  width: 140px; height: 140px;
+  background: rgba(88,214,199,0.22);
+  bottom: -30px; left: -20px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: .2px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+h1 {
+  margin: 16px 0 10px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.sub {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 18px;
+}
+
+.panel {
+  padding: 22px;
+}
+
+.title {
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+}
+
+.text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.timer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.box {
+  padding: 14px 10px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.lab {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.06);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent2);
+  box-shadow: 0 0 0 8px rgba(88,214,199,0.12);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+button, a.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button:hover, a.btn:hover { transform: translateY(-1px); }
+button:active, a.btn:active { transform: translateY(0); }
+
+.primary {
+  background: linear-gradient(135deg, var(--accent), #6cb1ff);
+  color: white;
+  box-shadow: 0 12px 30px rgba(108,177,255,0.28);
+}
+
+.ghost {
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.09);
+}
+
+.disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.question {
+  display: none;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(140,125,255,0.16), rgba(255,255,255,0.07));
+  border: 1px solid rgba(255,255,255,0.09);
+}
+
+.question h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.question p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.footer {
+  text-align: center;
+  color: rgba(245,247,255,0.65);
+  font-size: 13px;
+  padding: 2px 10px 0;
+}
+
+@media (max-width: 760px) {
+  .hero, .panel { padding: 18px; }
+  .grid { grid-template-columns: 1fr; }
+  .timer { grid-template-columns: repeat(2, 1fr); }
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="shell">
+      <section class="hero">
+        <span class="badge">✨ Teka-Teki Digital • Raka579</span>
+        <h1>Selamat datang.</h1>
+        <p class="sub">
+          Ini adalah pintu masuk untuk teka-teki digital. Semua akses dijaga waktu,
+          jadi hanya bisa dibuka tepat pukul 22:30 dan akan tertutup lagi 24 jam setelahnya.
+          Tantangan ini juga dibatasi untuk bulan dan tahun berjalan saja.
+        </p>
+        <div class="status" id="statusBar"><span class="dot" id="statusDot"></span><span id="statusText">Memeriksa waktu...</span></div>
+      </section><section class="grid">
+    <article class="panel">
+      <h3 class="title">Waktu pembukaan</h3>
+      <p class="text">
+        Tombol akan aktif saat jam menunjukkan <strong>22:30</strong>. Jika sudah terbuka,
+        akses hanya berlaku selama 24 jam sampai <strong>22:30 keesokan harinya</strong>.
+        Di luar bulan atau tahun ini, halaman akan tetap terkunci.
+      </p>
+
+      <div class="timer" aria-label="Hitungan mundur">
+        <div class="box"><div class="num" id="days">00</div><span class="lab">Hari</span></div>
+        <div class="box"><div class="num" id="hours">00</div><span class="lab">Jam</span></div>
+        <div class="box"><div class="num" id="minutes">00</div><span class="lab">Menit</span></div>
+        <div class="box"><div class="num" id="seconds">00</div><span class="lab">Detik</span></div>
+      </div>
+
+      <div class="actions">
+        <button class="primary disabled" id="startBtn">Masuk ke pertanyaan</button>
+        <a class="btn ghost" href="#info">Baca info</a>
+      </div>
+
+      <div class="question" id="questionBox">
+        <h2>Apakah kamu siap.....</h2>
+        <p>
+          Perjalanan berikutnya bukan sekadar klik tombol. Kamu akan masuk ke rangkaian
+          petunjuk, gambar, dan jawaban yang harus dicari satu per satu. Hati-hati,
+          karena setiap langkah bisa jadi penting.
+        </p>
+      </div>
+    </article>
+
+    <aside class="panel" id="info">
+      <h3 class="title">Tentang teka-teki ini</h3>
+      <p class="text">
+        Teka-teki digital ini dibuat sebagai tantangan singkat yang terlihat sederhana,
+        tetapi punya aturan waktu yang ketat. Tujuannya bukan cuma menjawab pertanyaan,
+        tetapi juga memperhatikan momen yang tepat untuk memulai.
+      </p>
+      <p class="text" style="margin-top:12px;">
+        Domain: <strong>raka579</strong><br />
+        ©2026 raka579 • All Rights Reserved.
+      </p>
+      <p class="text" style="margin-top:12px;">
+        Catatan: status buka/tutup mengikuti waktu perangkat yang membuka halaman ini.
+      </p>
+    </aside>
+  </section>
+
+  <div class="footer">©2026 raka579 • All Rights Reserved.</div>
+</main>
+
+  </div>  <script>
+    const startBtn = document.getElementById('startBtn');
+    const questionBox = document.getElementById('questionBox');
+    const statusText = document.getElementById('statusText');
+    const statusDot = document.getElementById('statusDot');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function sameMonthYear(a, b) {
+      return a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
+    }
+
+    function getNextWindow(now) {
+      const openToday = new Date(now);
+      openToday.setHours(22, 30, 0, 0);
+
+      const closeToday = new Date(openToday);
+      closeToday.setDate(closeToday.getDate() + 1);
+
+      let openAt = openToday;
+      let closeAt = closeToday;
+
+      if (now >= closeAt) {
+        openAt = new Date(openToday);
+        openAt.setDate(openAt.getDate() + 1);
+        closeAt = new Date(closeAt);
+        closeAt.setDate(closeAt.getDate() + 1);
+      }
+
+      return { openAt, closeAt };
+    }
+
+    function update() {
+      const now = new Date();
+      const { openAt, closeAt } = getNextWindow(now);
+
+      const currentMonthYearValid = sameMonthYear(now, openAt) && sameMonthYear(now, closeAt);
+      const beforeOpen = now < openAt;
+      const duringWindow = now >= openAt && now < closeAt;
+      const afterClose = now >= closeAt;
+
+      let target;
+      let label = '';
+      let enabled = false;
+
+      if (!currentMonthYearValid) {
+        label = 'Akses terkunci untuk bulan/tahun ini.';
+        target = null;
+      } else if (beforeOpen) {
+        label = 'Menuju pembukaan pukul 22:30.';
+        target = openAt;
+      } else if (duringWindow) {
+        label = 'Tantangan sedang terbuka.';
+        target = closeAt;
+        enabled = true;
+      } else if (afterClose) {
+        label = 'Waktu habis.';
+        target = null;
+      }
+
+      if (!currentMonthYearValid) {
+        startBtn.classList.add('disabled');
+        startBtn.setAttribute('disabled', 'disabled');
+        questionBox.style.display = 'none';
+        statusDot.style.background = 'var(--danger)';
+        statusText.textContent = label;
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        return;
+      }
+
+      if (enabled) {
+        startBtn.classList.remove('disabled');
+        startBtn.removeAttribute('disabled');
+        statusDot.style.background = 'var(--accent2)';
+        statusText.textContent = label;
+        questionBox.style.display = 'block';
+      } else {
+        startBtn.classList.add('disabled');
+        startBtn.setAttribute('disabled', 'disabled');
+        questionBox.style.display = 'none';
+        statusDot.style.background = beforeOpen ? 'var(--accent)' : 'var(--danger)';
+        statusText.textContent = label;
+      }
+
+      if (target) {
+        const diff = Math.max(0, target - now);
+        const s = Math.floor(diff / 1000);
+        const d = Math.floor(s / 86400);
+        const h = Math.floor((s % 86400) / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        const sec = s % 60;
+        daysEl.textContent = pad(d);
+        hoursEl.textContent = pad(h);
+        minutesEl.textContent = pad(m);
+        secondsEl.textContent = pad(sec);
+      }
+    }
+
+    startBtn.addEventListener('click', () => {
+      if (startBtn.disabled) return;
+      questionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    update();
+    setInterval(update, 1000);
+  </script></body>
+</html>
