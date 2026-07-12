@@ -9,10 +9,9 @@
       --bg1: #0b1020;
       --bg2: #131a33;
       --card: rgba(255,255,255,0.08);
-      --card-strong: rgba(255,255,255,0.13);
+      --line: rgba(255,255,255,0.12);
       --text: #f5f7ff;
       --muted: rgba(245,247,255,0.72);
-      --line: rgba(255,255,255,0.12);
       --accent: #8c7dff;
       --accent2: #58d6c7;
       --danger: #ff6b8b;
@@ -44,7 +43,7 @@ body {
   gap: 18px;
 }
 
-.hero, .panel {
+.hero, .panel, .modal {
   background: var(--card);
   backdrop-filter: blur(18px);
   border: 1px solid var(--line);
@@ -62,7 +61,6 @@ body {
 .hero::after {
   content: "";
   position: absolute;
-  inset: auto;
   border-radius: 999px;
   filter: blur(22px);
   opacity: .6;
@@ -90,7 +88,6 @@ body {
   background: rgba(255,255,255,0.08);
   color: var(--muted);
   font-size: 13px;
-  letter-spacing: .2px;
   border: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -245,7 +242,6 @@ button:active, a.btn:active { transform: translateY(0); }
 
 .reveal {
   display: none;
-  overflow: hidden;
 }
 
 .reveal-inner {
@@ -319,6 +315,44 @@ button:active, a.btn:active { transform: translateY(0); }
   padding: 2px 10px 0;
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal {
+  width: min(560px, 100%);
+  padding: 22px;
+}
+
+.modal h2 {
+  margin: 0 0 10px;
+  font-size: 1.45rem;
+}
+
+.modal p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.hide {
+  display: none !important;
+}
+
 @media (max-width: 760px) {
   .hero, .panel { padding: 18px; }
   .grid { grid-template-columns: 1fr; }
@@ -335,9 +369,8 @@ button:active, a.btn:active { transform: translateY(0); }
         <span class="badge">✨ Teka-Teki Digital • Raka579</span>
         <h1>Selamat datang.</h1>
         <p class="sub">
-          Ini adalah pintu masuk untuk teka-teki digital. Semua akses dijaga waktu,
-          jadi hanya bisa dibuka tepat pukul 22:30 dan akan tertutup lagi 24 jam setelahnya.
-          Tantangan ini juga dibatasi untuk bulan dan tahun berjalan saja.
+          Ini adalah pintu masuk untuk teka-teki digital. Akses hanya terbuka pada
+          pukul 22:30 sampai 22:30 keesokan harinya.
         </p>
         <div class="status" id="statusBar">
           <span class="dot" id="statusDot"></span>
@@ -347,9 +380,8 @@ button:active, a.btn:active { transform: translateY(0); }
     <article class="panel" id="lockPanel">
       <h3 class="title">Waktu pembukaan</h3>
       <p class="text">
-        Tombol akan aktif saat jam menunjukkan <strong>22:30</strong>. Jika sudah terbuka,
-        akses hanya berlaku selama 24 jam sampai <strong>22:30 keesokan harinya</strong>.
-        Di luar bulan atau tahun ini, halaman akan tetap terkunci.
+        Tombol akan aktif saat jam menunjukkan <strong>22:30</strong>.
+        Setelah itu akses tetap terbuka sampai <strong>22:30 keesokan harinya</strong>.
       </p>
 
       <div class="timer" aria-label="Hitungan mundur">
@@ -360,33 +392,25 @@ button:active, a.btn:active { transform: translateY(0); }
       </div>
 
       <div class="actions">
-        <button class="primary disabled" id="startBtn" disabled>Masuk ke pertanyaan</button>
+        <button class="primary disabled" id="startBtn" disabled>Mulai</button>
         <a class="btn ghost" href="#info">Baca info</a>
       </div>
 
       <div class="question" id="questionBox">
-        <h2>Apakah kamu siap.....</h2>
-        <p>
-          Perjalanan berikutnya bukan sekadar klik tombol. Kamu akan masuk ke rangkaian
-          petunjuk, gambar, dan jawaban yang harus dicari satu per satu. Hati-hati,
-          karena setiap langkah bisa jadi penting.
-        </p>
+        <h2>Apakah kamu siap?</h2>
+        <p>Kalau lanjut, kamu akan masuk ke halaman berikutnya.</p>
       </div>
     </article>
 
     <aside class="panel" id="info">
       <h3 class="title">Tentang teka-teki ini</h3>
       <p class="text">
-        Teka-teki digital ini dibuat sebagai tantangan singkat yang terlihat sederhana,
-        tetapi punya aturan waktu yang ketat. Tujuannya bukan cuma menjawab pertanyaan,
-        tetapi juga memperhatikan momen yang tepat untuk memulai.
+        Teka-teki ini dibuat sebagai tantangan singkat. Fokusnya ada di waktu yang tepat
+        dan ketelitian membaca petunjuk.
       </p>
       <p class="text" style="margin-top:12px;">
         Domain: <strong>raka579</strong><br />
         ©2026 raka579 • All Rights Reserved.
-      </p>
-      <p class="text" style="margin-top:12px;">
-        Catatan: status buka/tutup mengikuti waktu perangkat yang membuka halaman ini.
       </p>
     </aside>
   </section>
@@ -407,9 +431,7 @@ button:active, a.btn:active { transform: translateY(0); }
         </div>
 
         <div class="note-card">
-          <p class="story">
-
-Selamat datang di tantangan pertama.
+          <p class="story">Selamat datang di tantangan pertama.
 
 Di hadapanmu adalah kamar milik seseorang bernama Edo.
 
@@ -448,8 +470,7 @@ Kalau kamu cukup teliti, semua petunjuk sudah tersedia.
 Kadang jawaban bukan tersembunyi...
 melainkan memang tidak pernah diperhatikan.
 
-Selamat berburu.
-</p>
+Selamat berburu.</p>
 </div>
 </div>
 </div>
@@ -458,133 +479,138 @@ Selamat berburu.
   <div class="footer">©2026 raka579 • All Rights Reserved.</div>
 </main>
 
+  </div>  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <h2>Apakah kamu siap?</h2>
+      <p>Kalau kamu lanjut, gambar dan cerita Edo akan ditampilkan.</p>
+      <div class="modal-actions">
+        <button class="primary" id="yesBtn">Iya</button>
+        <button class="ghost" id="noBtn">Tidak</button>
+      </div>
+    </div>
   </div>  <script>
-    const startBtn = document.getElementById('startBtn');
-    const questionBox = document.getElementById('questionBox');
-    const statusText = document.getElementById('statusText');
-    const statusDot = document.getElementById('statusDot');
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-    const revealSection = document.getElementById('revealSection');
+const startBtn = document.getElementById('startBtn');
+const questionBox = document.getElementById('questionBox');
+const statusText = document.getElementById('statusText');
+const statusDot = document.getElementById('statusDot');
+const daysEl = document.getElementById('days');
+const hoursEl = document.getElementById('hours');
+const minutesEl = document.getElementById('minutes');
+const secondsEl = document.getElementById('seconds');
+const revealSection = document.getElementById('revealSection');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
 
-    let revealUnlocked = false;
+const openTime = new Date("2026-07-11T22:30:00");
+const closeTime = new Date("2026-07-12T22:30:00");
 
-    function pad(n) {
-      return String(n).padStart(2, '0');
-    }
+let revealShown = false;
 
-    function sameMonthYear(a, b) {
-      return a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
-    }
+function pad(n) {
+  return String(n).padStart(2, "0");
+}
 
-    function getNextWindow(now) {
-      const openToday = new Date(now);
-      openToday.setHours(22, 30, 0, 0);
+function showReveal() {
+  revealShown = true;
+  revealSection.style.display = "block";
+  revealSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
 
-      const closeToday = new Date(openToday);
-      closeToday.setDate(closeToday.getDate() + 1);
+function hideReveal() {
+  revealShown = false;
+  revealSection.style.display = "none";
+}
 
-      let openAt = openToday;
-      let closeAt = closeToday;
+function openModal() {
+  modalBackdrop.style.display = "flex";
+}
 
-      if (now >= closeAt) {
-        openAt = new Date(openToday);
-        openAt.setDate(openAt.getDate() + 1);
-        closeAt = new Date(closeAt);
-        closeAt.setDate(closeAt.getDate() + 1);
-      }
+function closeModal() {
+  modalBackdrop.style.display = "none";
+}
 
-      return { openAt, closeAt };
-    }
+function update() {
+  const now = new Date();
+  let target;
 
-    function showReveal() {
-      revealUnlocked = true;
-      revealSection.style.display = 'block';
-    }
+  if (now < openTime) {
 
-    function hideReveal() {
-      revealUnlocked = false;
-      revealSection.style.display = 'none';
-    }
+    statusText.textContent = "Menuju pembukaan pukul 22:30.";
+    statusDot.style.background = "var(--accent)";
 
-    function update() {
-      const now = new Date();
-      const { openAt, closeAt } = getNextWindow(now);
+    startBtn.disabled = true;
+    startBtn.classList.add("disabled");
 
-      const currentMonthYearValid = sameMonthYear(now, openAt) && sameMonthYear(now, closeAt);
-      const beforeOpen = now < openAt;
-      const duringWindow = now >= openAt && now < closeAt;
+    questionBox.style.display = "none";
+    hideReveal();
 
-      let target = null;
-      let label = '';
+    target = openTime;
 
-      if (!currentMonthYearValid) {
-        label = 'Akses terkunci untuk bulan/tahun ini.';
-      } else if (beforeOpen) {
-        label = 'Menuju pembukaan pukul 22:30.';
-        target = openAt;
-      } else if (duringWindow) {
-        label = 'Tantangan sedang terbuka.';
-        target = closeAt;
-      } else {
-        label = 'Waktu habis.';
-      }
+  } else if (now >= openTime && now < closeTime) {
 
-      if (!currentMonthYearValid) {
-        startBtn.classList.add('disabled');
-        startBtn.setAttribute('disabled', 'disabled');
-        questionBox.style.display = 'none';
-        hideReveal();
-        statusDot.style.background = 'var(--danger)';
-        statusText.textContent = label;
-        daysEl.textContent = '00';
-        hoursEl.textContent = '00';
-        minutesEl.textContent = '00';
-        secondsEl.textContent = '00';
-        return;
-      }
+    statusText.textContent = "Tantangan sedang terbuka.";
+    statusDot.style.background = "var(--accent2)";
 
-      if (duringWindow) {
-        startBtn.classList.remove('disabled');
-        startBtn.removeAttribute('disabled');
-        questionBox.style.display = 'block';
-        statusDot.style.background = 'var(--accent2)';
-        statusText.textContent = label;
+    startBtn.disabled = false;
+    startBtn.classList.remove("disabled");
 
-        if (revealUnlocked) {
-          showReveal();
-        }
-      } else {
-        startBtn.classList.add('disabled');
-        startBtn.setAttribute('disabled', 'disabled');
-        questionBox.style.display = 'none';
-        hideReveal();
-        statusDot.style.background = beforeOpen ? 'var(--accent)' : 'var(--danger)';
-        statusText.textContent = label;
-      }
+    questionBox.style.display = "block";
 
-      if (target) {
-        const diff = Math.max(0, target - now);
-        const s = Math.floor(diff / 1000);
-        const d = Math.floor(s / 86400);
-        const h = Math.floor((s % 86400) / 3600);
-        const m = Math.floor((s % 3600) / 60);
-        const sec = s % 60;
-        daysEl.textContent = pad(d);
-        hoursEl.textContent = pad(h);
-        minutesEl.textContent = pad(m);
-        secondsEl.textContent = pad(sec);
-      }
-    }
+    target = closeTime;
 
-    startBtn.addEventListener('click', () => {
-      if (startBtn.disabled) return;
-      showReveal();
-    });
+  } else {
 
-    update();
-    setInterval(update, 1000);
-  </script></body>
+    statusText.textContent = "Tantangan telah berakhir.";
+    statusDot.style.background = "var(--danger)";
+
+    startBtn.disabled = true;
+    startBtn.classList.add("disabled");
+
+    questionBox.style.display = "none";
+    hideReveal();
+
+    daysEl.textContent = "00";
+    hoursEl.textContent = "00";
+    minutesEl.textContent = "00";
+    secondsEl.textContent = "00";
+
+    return;
+  }
+
+  const diff = Math.max(0, target - now);
+  const total = Math.floor(diff / 1000);
+
+  daysEl.textContent = pad(Math.floor(total / 86400));
+  hoursEl.textContent = pad(Math.floor((total % 86400) / 3600));
+  minutesEl.textContent = pad(Math.floor((total % 3600) / 60));
+  secondsEl.textContent = pad(total % 60);
+}
+
+startBtn.addEventListener("click", () => {
+  if (startBtn.disabled) return;
+  openModal();
+});
+
+yesBtn.addEventListener("click", () => {
+  closeModal();
+  showReveal();
+});
+
+noBtn.addEventListener("click", () => {
+  closeModal();
+});
+
+modalBackdrop.addEventListener("click", (e) => {
+  if (e.target === modalBackdrop) {
+    closeModal();
+  }
+});
+
+update();
+setInterval(update, 1000);
+</script></body>
 </html>
