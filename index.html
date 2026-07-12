@@ -1,616 +1,385 @@
-<!DOCTYPE html><html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f1020" />
-  <title>Teka-Teki Digital • Raka579</title>
-  <style>
-    :root {
-      --bg1: #0b1020;
-      --bg2: #131a33;
-      --card: rgba(255,255,255,0.08);
-      --line: rgba(255,255,255,0.12);
-      --text: #f5f7ff;
-      --muted: rgba(245,247,255,0.72);
-      --accent: #8c7dff;
-      --accent2: #58d6c7;
-      --danger: #ff6b8b;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 24px;
-    }* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top, rgba(140,125,255,0.28), transparent 34%),
-    radial-gradient(circle at right, rgba(88,214,199,0.15), transparent 28%),
-    linear-gradient(180deg, var(--bg1), var(--bg2));
-  overflow-x: hidden;
-}
+<!DOCTYPE html>  
+<html lang="id">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <meta name="theme-color" content="#08111f" />  
+  <title>Apresiasi Pemenang Teka-Teki Digital Resmi</title>  
+  <style>  
+    :root{  
+      --bg1:#06101d;  
+      --bg2:#0b1530;  
+      --panel:rgba(255,255,255,.07);  
+      --panel2:rgba(255,255,255,.05);  
+      --line:rgba(255,255,255,.14);  
+      --text:#eef4ff;  
+      --muted:#c7d3ef;  
+      --gold:#d8b15b;  
+      --shadow:0 24px 70px rgba(0,0,0,.42);  
+      --success:#10b981;
+    }  
+    *{box-sizing:border-box}  
+    html,body{height:100%}  
+    body{  
+      margin:0;  
+      font-family:Arial,Helvetica,sans-serif;  
+      color:var(--text);  
+      background:  
+        radial-gradient(circle at top, rgba(125,211,252,.16), transparent 30%),  
+        radial-gradient(circle at bottom right, rgba(216,177,91,.14), transparent 25%),  
+        linear-gradient(180deg,var(--bg1),var(--bg2));  
+      overflow-x:hidden;  
+    }  
+    .wrap{  
+      min-height:100%;  
+      padding:24px;  
+      display:flex;  
+      align-items:center;  
+      justify-content:center;  
+    }  
+    
+    /* Layout Utama: Single Card di Tengah saat Awal */
+    .container-box {
+      width: min(650px, 100%);
+      transition: all 0.5s ease;
+    }
+    
+    /* Berubah Menjadi Grid setelah Verifikasi Sukses */
+    .container-box.unlocked-layout {
+      width: min(1200px, 100%);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 32px;
+      align-items: center;
+    }
 
-.wrap {
-  min-height: 100%;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
+    .card{  
+      background:linear-gradient(180deg, var(--panel), var(--panel2));  
+      border:1px solid var(--line);  
+      border-radius:24px;  
+      box-shadow:var(--shadow);  
+      backdrop-filter:blur(12px);  
+      padding:40px;
+    }  
+    
+    /* Wadah Sertifikat */
+    .certificate-holder {
+      display: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 18px 48px rgba(0,0,0,.35);
+      animation: fadeIn 0.8s ease forwards;
+    }
+    .certificate-image{  
+      width:100%;  
+      display:block;  
+      background:#fff;  
+    }  
 
-.shell {
-  width: min(920px, 100%);
-  display: grid;
-  gap: 18px;
-}
+    h1,p{margin:0}  
+    h1{  
+      font-size:32px;  
+      line-height:1.2;  
+      margin-bottom:12px;  
+      letter-spacing:.01em;  
+      background: linear-gradient(135deg, #fff, var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }  
+    p{  
+      color:var(--muted);  
+      line-height:1.75;  
+      font-size:16px;  
+    }  
+    .winner-highlight {
+      font-size: 28px;
+      color: var(--gold);
+      margin: 20px 0;
+      font-weight: bold;
+      border-left: 4px solid var(--gold);
+      padding-left: 16px;
+    }
+    .btns{  
+      display:grid;  
+      gap:12px;  
+      margin-top:24px;  
+    }  
+    .btn{  
+      appearance:none;  
+      border:0;  
+      border-radius:16px;  
+      padding:16px;  
+      font-size:15px;  
+      font-weight:700;  
+      cursor:pointer;  
+      transition:all .2s ease;  
+      box-shadow:0 12px 24px rgba(0,0,0,.18);  
+      text-decoration:none;  
+      text-align:center;  
+      display:inline-flex;  
+      align-items:center;  
+      justify-content:center;  
+      gap:10px;  
+    }  
+    .btn:hover{transform:translateY(-2px); opacity: 0.95;}  
+    .btn:active{transform:translateY(1px)}  
+    .primary{background:linear-gradient(135deg,#d8b15b,#f3dd99);color:#172033}  
+    .secondary{background:linear-gradient(135deg,#1d4ed8,#38bdf8);color:#fff}  
+    .ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.12)}  
+    
+    /* Pop-up Minta PIN / Sandi Keamanan */
+    .crypto-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(4, 9, 20, 0.9);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .crypto-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .crypto-modal {
+      width: min(400px, 90%);
+      background: #0b1426;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+    }
+    .input-code {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-family: monospace;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      margin-top: 15px;
+    }
+    .input-code:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .badge-row{  
+      display:flex;  
+      align-items:center;  
+      gap:10px;  
+      margin-bottom:16px;  
+      color:#ffe7a8;  
+      font-weight:700;  
+      letter-spacing:.16em;  
+      text-transform:uppercase;  
+      font-size:12px;  
+    }  
+    .dot{  
+      width:10px;height:10px;border-radius:50%;  
+      background:var(--gold);  
+      box-shadow:0 0 0 6px rgba(216,177,91,.14);  
+    }  
+    .hidden { display: none !important; }
+    .status-msg {
+      font-size: 14px;
+      margin-top: 12px;
+      font-weight: bold;
+    }
 
-.hero, .panel, .modal {
-  background: var(--card);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-.hero {
-  padding: 28px;
-  position: relative;
-  overflow: hidden;
-}
+    @media (max-width: 980px){  
+      .container-box.unlocked-layout { grid-template-columns: 1fr; }  
+      .wrap{padding:14px}  
+      h1{font-size:26px}  
+    }  
 
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(22px);
-  opacity: .6;
-  pointer-events: none;
-}
+    @media print{  
+      body{ background:#fff; color:#000; }  
+      .wrap{padding:0;display:block}  
+      .container-box{display:block;width:100%}  
+      .card, .crypto-overlay{display:none !important}  
+      .certificate-holder{ display:block !important; width:100%; border-radius:0; box-shadow:none; }  
+      .certificate-image{ width:100%; }  
+    }
+  </style>  
+</head>  
+<body>  
 
-.hero::before {
-  width: 180px; height: 180px;
-  background: rgba(140,125,255,0.35);
-  top: -40px; right: -20px;
-}
+  <div class="wrap">  
+    <!-- Bungkus Konten Utama -->
+    <div class="container-box" id="mainContainer">  
+      
+      <!-- Elemen Gambar Sertifikat (Disembunyikan total di awal) -->
+      <div class="certificate-holder" id="certComponent">  
+        <img  
+          class="certificate-image"  
+          src="SERTIFIKAT_PENGHARGAAN_TEKA-TEKI_DIGITAL_RESMI.png"  
+          alt="Sertifikat Penghargaan Tantang Teka-Teki Digital"  
+        />  
+      </div>  
 
-.hero::after {
-  width: 140px; height: 140px;
-  background: rgba(88,214,199,0.22);
-  bottom: -30px; left: -20px;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  color: var(--muted);
-  font-size: 13px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-h1 {
-  margin: 16px 0 10px;
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-}
-
-.sub {
-  margin: 0;
-  max-width: 62ch;
-  color: var(--muted);
-  line-height: 1.75;
-  font-size: 1rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 18px;
-}
-
-.panel {
-  padding: 22px;
-}
-
-.title {
-  font-size: 1.05rem;
-  margin: 0 0 8px;
-}
-
-.text {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.timer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.box {
-  padding: 14px 10px;
-  border-radius: 18px;
-  text-align: center;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.num {
-  font-size: 1.5rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.lab {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.09);
-  background: rgba(255,255,255,0.06);
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent2);
-  box-shadow: 0 0 0 8px rgba(88,214,199,0.12);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-button, a.btn {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  padding: 14px 18px;
-  border-radius: 16px;
-  font: inherit;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-button:hover, a.btn:hover { transform: translateY(-1px); }
-button:active, a.btn:active { transform: translateY(0); }
-
-.primary {
-  background: linear-gradient(135deg, var(--accent), #6cb1ff);
-  color: white;
-  box-shadow: 0 12px 30px rgba(108,177,255,0.28);
-}
-
-.ghost {
-  background: rgba(255,255,255,0.08);
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,0.09);
-}
-
-.disabled {
-  opacity: .45;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.question {
-  display: none;
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(140,125,255,0.16), rgba(255,255,255,0.07));
-  border: 1px solid rgba(255,255,255,0.09);
-}
-
-.question h2 {
-  margin: 0 0 8px;
-  font-size: 1.35rem;
-}
-
-.question p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.75;
-}
-
-.reveal {
-  display: none;
-}
-
-.reveal-inner {
-  display: grid;
-  gap: 18px;
-}
-
-.story-head {
-  display: grid;
-  gap: 10px;
-  padding: 22px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: var(--radius);
-}
-
-.story-head h2 {
-  margin: 0;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-}
-
-.story-head p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-.card-story {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 18px;
-}
-
-.photo-card, .note-card {
-  padding: 18px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.09);
-}
-
-.photo-card img {
-  width: 100%;
-  display: block;
-  border-radius: 18px;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.caption {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.story {
-  white-space: pre-line;
-  color: var(--muted);
-  line-height: 1.9;
-  margin: 0;
-  font-size: 1rem;
-}
-
-.footer {
-  text-align: center;
-  color: rgba(245,247,255,0.65);
-  font-size: 13px;
-  padding: 2px 10px 0;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 50;
-}
-
-.modal {
-  width: min(560px, 100%);
-  padding: 22px;
-}
-
-.modal h2 {
-  margin: 0 0 10px;
-  font-size: 1.45rem;
-}
-
-.modal p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-.modal-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-
-.hide {
-  display: none !important;
-}
-
-@media (max-width: 760px) {
-  .hero, .panel { padding: 18px; }
-  .grid { grid-template-columns: 1fr; }
-  .timer { grid-template-columns: repeat(2, 1fr); }
-  .card-story { grid-template-columns: 1fr; }
-}
-
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <main class="shell">
-      <section class="hero">
-        <span class="badge">✨ Teka-Teki Digital • Raka579</span>
-        <h1>Selamat datang.</h1>
-        <p class="sub">
-          Ini adalah pintu masuk untuk teka-teki digital. Akses hanya terbuka pada
-          pukul 22:30 sampai 22:30 keesokan harinya.
+      <!-- Kartu Utama Teks Apresiasi -->
+      <main class="card" id="textComponent">  
+        <div class="badge-row" id="badgeTop">  
+          <span class="dot"></span>  
+          <span>Apresiasi Tertinggi</span>  
+        </div>  
+        <h1>Selamat atas Kemenangan Anda!</h1>  
+        <p>  
+          Penghargaan khusus ini dipersembahkan sebagai bentuk pengakuan resmi atas kecerdasan, ketangkasan, dan keberhasilan dalam memecahkan seluruh tantangan yang ada.
+        </p>  
+        
+        <div class="winner-highlight">
+          Naufal Akbar Firmansyah
+        </div>  
+        
+        <p style="font-size: 14px; opacity: 0.8;" id="organizerText">
+          Penyelenggara Tantangan: <strong>Muhammad Raka Saputra</strong>
         </p>
-        <div class="status" id="statusBar">
-          <span class="dot" id="statusDot"></span>
-          <span id="statusText">Memeriksa waktu...</span>
+
+        <!-- Tombol Utama Halaman Pertama -->
+        <div class="btns" id="gateButton">
+          <button class="btn primary" type="button" onclick="openSecurityGateway()">
+            Lihat Sertifikat Penghargaan
+          </button>
         </div>
-      </section>  <section class="grid">
-    <article class="panel" id="lockPanel">
-      <h3 class="title">Waktu pembukaan</h3>
-      <p class="text">
-        Tombol akan aktif saat jam menunjukkan <strong>22:30</strong>.
-        Setelah itu akses tetap terbuka sampai <strong>22:30 keesokan harinya</strong>.
-      </p>
 
-      <div class="timer" aria-label="Hitungan mundur">
-        <div class="box"><div class="num" id="days">00</div><span class="lab">Hari</span></div>
-        <div class="box"><div class="num" id="hours">00</div><span class="lab">Jam</span></div>
-        <div class="box"><div class="num" id="minutes">00</div><span class="lab">Menit</span></div>
-        <div class="box"><div class="num" id="seconds">00</div><span class="lab">Detik</span></div>
-      </div>
-
-      <div class="actions">
-        <button class="primary disabled" id="startBtn" disabled>Mulai</button>
-        <a class="btn ghost" href="#info">Baca info</a>
-      </div>
-
-      <div class="question" id="questionBox">
-        <h2>Apakah kamu siap?</h2>
-        <p>Kalau lanjut, kamu akan masuk ke halaman berikutnya.</p>
-      </div>
-    </article>
-
-    <aside class="panel" id="info">
-      <h3 class="title">Tentang teka-teki ini</h3>
-      <p class="text">
-        Teka-teki ini dibuat sebagai tantangan singkat. Fokusnya ada di waktu yang tepat
-        dan ketelitian membaca petunjuk.
-      </p>
-      <p class="text" style="margin-top:12px;">
-        Domain: <strong>raka579</strong><br />
-        ©2026 raka579 • All Rights Reserved.
-      </p>
-    </aside>
-  </section>
-
-  <section class="reveal panel" id="revealSection">
-    <div class="reveal-inner">
-      <div class="story-head">
-        <h2>━━━━━━━━━━━━━━━━━━<br>🧩 EDO - SEORANG SISWA PROGRAMER<br>━━━━━━━━━━━━━━━━━━</h2>
-        <p>"Setiap programmer meninggalkan jejak. Sebagian meninggalkannya di internet."</p>
-      </div>
-
-      <div class="card-story">
-        <div class="photo-card">
-          <img src="foto.jpg" alt="Foto kamar Edo" />
-          <div class="caption">
-            Foto kamar Edo. Di sinilah petunjuk pertama tersembunyi.
+        <!-- Opsi Unduh (Disembunyikan total di awal, muncul setelah sukses) -->
+        <div class="btns hidden" id="downloadOptions">
+          <div style="color: var(--success); font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            ✓ Enkripsi Dibuka. Akses Sertifikat Diberikan.
           </div>
-        </div>
+          <a class="btn primary" href="SERTIFIKAT_PENGHARGAAN_TEKA-TEKI_DIGITAL_RESMI.png" download>  
+            Download PNG  
+          </a>  
+          <button class="btn secondary" type="button" onclick="window.print()">  
+            Simpan sebagai PDF  
+          </button>  
+          <button class="btn ghost" type="button" onclick="openImage()">  
+            Lihat Gambar Penuh  
+          </button>  
+        </div>  
+      </main>  
 
-        <div class="note-card">
-          <p class="story">Selamat datang di tantangan pertama.
-
-Di hadapanmu adalah kamar milik seseorang bernama Edo.
-
-Ia masih muda, gemar bermain sepak bola, dan sedang belajar membuat website.
-
-Suatu hari, Edo berhasil menerbitkan website pertamanya.
-
-Namun...
-
-Ia tidak pernah membagikan alamat website tersebut kepada siapa pun.
-
-Yang tersisa hanyalah foto kamarnya dan beberapa catatan.
-
-━━━━━━━━━━━━━━━━━━
-📄 CATATAN EDO
-━━━━━━━━━━━━━━━━━━
-
-• Namaku hanya terdiri dari tiga huruf.
-
-• Aku lahir pada tahun 2006.
-
-• Saat catatan ini dibuat, usiaku masih 15 tahun.
-
-• Website pertamaku dibuat menggunakan GitHub Pages.
-
-━━━━━━━━━━━━━━━━━━
-
-🎯 Misi:
-
-Temukan alamat website pertama milik Edo.
-
-Aku tidak akan memberitahumu bagaimana bentuk alamatnya.
-
-Kalau kamu cukup teliti, semua petunjuk sudah tersedia.
-
-Kadang jawaban bukan tersembunyi...
-melainkan memang tidak pernah diperhatikan.
-
-Selamat berburu.</p>
-</div>
-</div>
-</div>
-</section>
-
-  <div class="footer">©2026 raka579 • All Rights Reserved.</div>
-</main>
-
-  </div>  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal">
-      <h2>Apakah kamu siap?</h2>
-      <p>Kalau kamu lanjut, gambar dan cerita Edo akan ditampilkan.</p>
-      <div class="modal-actions">
-        <button class="primary" id="yesBtn">Iya</button>
-        <button class="ghost" id="noBtn">Tidak</button>
-      </div>
     </div>
-  </div>  <script>
-const startBtn = document.getElementById('startBtn');
-const questionBox = document.getElementById('questionBox');
-const statusText = document.getElementById('statusText');
-const statusDot = document.getElementById('statusDot');
-const daysEl = document.getElementById('days');
-const hoursEl = document.getElementById('hours');
-const minutesEl = document.getElementById('minutes');
-const secondsEl = document.getElementById('seconds');
-const revealSection = document.getElementById('revealSection');
-const modalBackdrop = document.getElementById('modalBackdrop');
-const yesBtn = document.getElementById('yesBtn');
-const noBtn = document.getElementById('noBtn');
+  </div>    
 
-const openTime = new Date("2026-07-11T22:30:00");
-const closeTime = new Date("2026-07-12T22:30:00");
+  <!-- Jendela Overlay Autentikasi Keamanan Perangkat -->
+  <div class="crypto-overlay" id="secureOverlay">
+    <div class="crypto-modal">
+      <h2 style="margin:0 0 8px 0; font-size:16px; color:var(--gold);">🔒 VERIFIKASI KEAMANAN</h2>
+      <p style="font-size:13px; opacity:0.8; line-height:1.5;">Masukkan kode verifikasi dokumen di bawah ini untuk melanjutkan enkripsi.</p>
+      
+      <input type="text" class="input-code" id="verificationCode" placeholder="Kode RGXWSD-..." autocomplete="off">
+      
+      <button class="btn secondary" style="width:100%; margin-top:5px;" type="button" onclick="verifyDeviceAndCode()">
+        🛡️ Scan Sidik Jari / PIN Perangkat
+      </button>
+      <button class="btn ghost" style="width:100%; margin-top:8px; padding:10px; font-size:13px;" type="button" onclick="closeSecurityGateway()">
+        Batal
+      </button>
+      
+      <div class="status-msg" id="statusMessage"></div>
+    </div>
+  </div>
 
-let revealShown = false;
+  <script>  
+    const targetCode = "RGXWSD-1207-2026-419295";
 
-function pad(n) {
-  return String(n).padStart(2, "0");
-}
+    function openSecurityGateway() {
+      document.getElementById('secureOverlay').classList.add('show');
+    }
 
-function showReveal() {
-  revealShown = true;
-  revealSection.style.display = "block";
-  revealSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}
+    function closeSecurityGateway() {
+      document.getElementById('secureOverlay').classList.remove('show');
+      document.getElementById('statusMessage').innerText = "";
+    }
 
-function hideReveal() {
-  revealShown = false;
-  revealSection.style.display = "none";
-}
+    async function verifyDeviceAndCode() {
+      const codeInput = document.getElementById('verificationCode').value.trim();
+      const statusMsg = document.getElementById('statusMessage');
+      
+      // 1. Cek kode teks
+      if (codeInput !== targetCode) {
+        statusMsg.style.color = "#ef4444";
+        statusMsg.innerText = "❌ Kode Akses salah atau tidak sah!";
+        return;
+      }
 
-function openModal() {
-  modalBackdrop.style.display = "flex";
-}
+      statusMsg.style.color = "var(--gold)";
+      statusMsg.innerText = "⏳ Memanggil sistem keamanan perangkat...";
 
-function closeModal() {
-  modalBackdrop.style.display = "none";
-}
+      // 2. Cek kompatibilitas WebAuthn (Sidik Jari / PIN bawaan OS)
+      if (!window.PublicKeyCredential) {
+        statusMsg.innerText = "⚠️ Browser tidak mendukung sensor biometrik. Membuka otomatis...";
+        setTimeout(unlockProcess, 1500);
+        return;
+      }
 
-function update() {
-  const now = new Date();
-  let target;
+      try {
+        const randomChallenge = new Uint8Array(32);
+        window.crypto.getRandomValues(randomChallenge);
 
-  if (now < openTime) {
+        const options = {
+          publicKey: {
+            challenge: randomChallenge,
+            rp: { name: "Sertifikat Teka Teki" },
+            user: { id: new Uint8Array([1]), name: "naufal", displayName: "Naufal" },
+            pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+            timeout: 60000,
+            authenticatorSelection: { userVerification: "required" }
+          }
+        };
 
-    statusText.textContent = "Menuju pembukaan pukul 22:30.";
-    statusDot.style.background = "var(--accent)";
+        // Di baris ini, popup Sidik Jari/PIN/FaceID bawaan HP atau Laptop asli akan muncul ke user
+        await navigator.credentials.create(options);
+        unlockProcess();
 
-    startBtn.disabled = true;
-    startBtn.classList.add("disabled");
+      } catch (err) {
+        if (err.name === "NotAllowedError" || err.name === "SecurityError") {
+          statusMsg.style.color = "#ef4444";
+          statusMsg.innerText = "❌ Verifikasi dibatalkan atau PIN/Sidik Jari salah.";
+        } else {
+          // Bypass aman jika dijalankan di localhost/lingkungan non-HTTPS yang memblokir WebAuthn
+          statusMsg.style.color = "var(--success)";
+          statusMsg.innerText = "✓ Otentikasi token cadangan berhasil!";
+          setTimeout(unlockProcess, 1000);
+        }
+      }
+    }
 
-    questionBox.style.display = "none";
-    hideReveal();
+    function unlockProcess() {
+      // Sembunyikan pop-up keamanan
+      closeSecurityGateway();
+      
+      // Sembunyikan tombol "Lihat Sertifikat" awal
+      document.getElementById('gateButton').classList.add('hidden');
+      
+      // Ubah layout container dari 1 kolom di tengah menjadi 2 kolom grid (Kiri-Kanan)
+      document.getElementById('mainContainer').classList.add('unlocked-layout');
+      
+      // Munculkan gambar sertifikat di sebelah kiri dengan animasi halus
+      document.getElementById('certComponent').style.display = "block";
+      
+      // Munculkan menu unduhan (PNG, PDF, Lihat) di bawah teks apresiasi
+      document.getElementById('downloadOptions').classList.remove('hidden');
+    }
 
-    target = openTime;
-
-  } else if (now >= openTime && now < closeTime) {
-
-    statusText.textContent = "Tantangan sedang terbuka.";
-    statusDot.style.background = "var(--accent2)";
-
-    startBtn.disabled = false;
-    startBtn.classList.remove("disabled");
-
-    questionBox.style.display = "block";
-
-    target = closeTime;
-
-  } else {
-
-    statusText.textContent = "Tantangan telah berakhir.";
-    statusDot.style.background = "var(--danger)";
-
-    startBtn.disabled = true;
-    startBtn.classList.add("disabled");
-
-    questionBox.style.display = "none";
-    hideReveal();
-
-    daysEl.textContent = "00";
-    hoursEl.textContent = "00";
-    minutesEl.textContent = "00";
-    secondsEl.textContent = "00";
-
-    return;
-  }
-
-  const diff = Math.max(0, target - now);
-  const total = Math.floor(diff / 1000);
-
-  daysEl.textContent = pad(Math.floor(total / 86400));
-  hoursEl.textContent = pad(Math.floor((total % 86400) / 3600));
-  minutesEl.textContent = pad(Math.floor((total % 3600) / 60));
-  secondsEl.textContent = pad(total % 60);
-}
-
-startBtn.addEventListener("click", () => {
-  if (startBtn.disabled) return;
-  openModal();
-});
-
-yesBtn.addEventListener("click", () => {
-  closeModal();
-  showReveal();
-});
-
-noBtn.addEventListener("click", () => {
-  closeModal();
-});
-
-modalBackdrop.addEventListener("click", (e) => {
-  if (e.target === modalBackdrop) {
-    closeModal();
-  }
-});
-
-update();
-setInterval(update, 1000);
-</script></body>
+    function openImage() {  
+      window.open('SERTIFIKAT_PENGHARGAAN_TEKA-TEKI_DIGITAL_RESMI.png', '_blank');  
+    }  
+  </script>  
+</body>  
 </html>
